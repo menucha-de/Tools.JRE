@@ -4,7 +4,7 @@ Section: libs
 Priority: optional
 Build-Depends: openjdk-11-jdk-headless:amd64, openjdk-11-jdk-headless:armhf, zip
 Standards-Version: 4.0.0
-Homepage: https://mica.harting.com
+Homepage: https://peramic.github.io
 
 Package: havis-jre-8
 Architecture: any
@@ -12,7 +12,7 @@ Multi-Arch: same
 Depends: ${misc:Depends},
          ${shlibs:Depends}
 Pre-Depends: ${misc:Pre-Depends}
-Provides: openjdk-8-jre-headless (= 2:1.8-58+deb9u1)
+Provides: openjdk-8-jre-headless (= 8u275-b01-1~deb9u1)
 Conflicts: openjdk-8-jre-headless
 Description: OpenJDK Java runtime, using Hotspot JIT (headless)
  Minimal Java runtime - needed for executing non GUI Java programs, using Hotspot JIT.
@@ -23,7 +23,7 @@ Multi-Arch: same
 Depends: ${misc:Depends},
          ${shlibs:Depends}
 Pre-Depends: ${misc:Pre-Depends}
-Provides: havis-jre-8, openjdk-8-jre-headless (= 2:1.8-58+deb9u1)
+Provides: havis-jre-8, openjdk-8-jre-headless (= 8u275-b01-1~deb9u1)
 Conflicts: havis-jre-8, openjdk-8-jre-headless
 Description: OpenJDK Java runtime, using Hotspot JIT (headless)
  Minimal Java runtime - needed for executing non GUI Java programs, using Hotspot JIT.
@@ -35,7 +35,7 @@ Depends: mica-rpc,
          ${misc:Depends},
          ${shlibs:Depends}
 Pre-Depends: ${misc:Pre-Depends}
-Provides: openjdk-11-jre-headless (= 11.0.4+11-1~bpo9+1)
+Provides: openjdk-11-jre-headless (= 11.0.6+10-1~bpo9+1)
 Conflicts: havis-jdk, openjdk-11-jre-headless
 Description: OpenJDK Java runtime, using Hotspot JIT (headless)
  Minimal Java runtime - needed for executing non GUI Java programs, using Hotspot JIT.
@@ -47,7 +47,7 @@ Depends: mica-rpc,
          ${misc:Depends},
          ${shlibs:Depends}
 Pre-Depends: ${misc:Pre-Depends}
-Provides: havis-jre, openjdk-11-jre-headless (= 11.0.4+11-1~bpo9+1)
+Provides: havis-jre, openjdk-11-jre-headless (= 11.0.6+10-1~bpo9+1)
 Conflicts: havis-jre, openjdk-11-jre-headless
 Description: OpenJDK Java runtime, using Hotspot JIT (headless)
  Minimal Java runtime - needed for executing non GUI Java programs, using Hotspot JIT.
