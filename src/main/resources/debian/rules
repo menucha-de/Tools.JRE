@@ -1,0 +1,24 @@
+#!/usr/bin/make -f
+ARCH ?= armhf
+OUTPUT=debian/tmp
+JAVA_8_HOME=/usr/lib/jvm/java-8-openjdk-$(ARCH)
+%:
+	dh_clean
+	rm -rf ${OUTPUT}
+	apt download openjdk-8-jre-headless:$(ARCH)
+	mkdir -p ${OUTPUT}/havis-jre-8
+	dpkg -X openjdk-8-jre-headless_*_$(ARCH).deb ${OUTPUT}/havis-jre-8
+	rm openjdk-8-jre-headless_*_$(ARCH).deb
+	zip -d ${OUTPUT}/havis-jre-8/usr/lib/jvm/java-8-openjdk-$(ARCH)/jre/lib/rt.jar /com/sun/corba* /com/sun/java/swing* /com/sun/media* /com/sun/swing* /javax/swing* /javax/print* /javax/sound* /javax/accessibility* /javax/tools* /javax/smartcardio* /org/omg*
+	dh_install -phavis-jre-8  --sourcedir ${OUTPUT}/havis-jre-8
+	dh_install -phavis-jdk-8  --sourcedir ${OUTPUT}/havis-jre-8
+	dh_installinit
+	dh_link -phavis-jre-8 $(JAVA_8_HOME)/bin/java usr/bin/java
+	dh_link -phavis-jdk-8 $(JAVA_8_HOME)/bin/java usr/bin/java
+	#dh_strip -- -DArchitecture=$(ARCH)
+	dh_makeshlibs
+	dh_shlibdeps
+	dh_installdeb
+	dh_gencontrol -- -DArchitecture=$(ARCH)
+	dh_md5sums
+	dh_builddeb

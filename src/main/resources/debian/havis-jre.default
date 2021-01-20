@@ -1,0 +1,2 @@
+export LANG="C.UTF-8"
+ARGS="-Dhavis.net.server.http.port=80 -Djava.security.egd=file:/dev/./urandom -cp /opt/havis-apps/bundle/*:/usr/share/java/*"

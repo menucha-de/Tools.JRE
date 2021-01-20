@@ -1,0 +1,29 @@
+Source: havis-jre
+Maintainer: HARTING IT_SD <opensource@HARTING.com>
+Section: libs
+Priority: optional
+Build-Depends: openjdk-8-jre-headless
+Standards-Version: 4.0.0
+Homepage: https://mica.harting.com
+
+Package: havis-jre-8
+Architecture: any
+Multi-Arch: same
+Depends: ${misc:Depends},
+         ${shlibs:Depends}
+Pre-Depends: ${misc:Pre-Depends}
+Provides: openjdk-8-jre-headless (= 8u151-b12-1~deb9u1)
+Conflicts: openjdk-8-jre-headless
+Description: OpenJDK Java runtime, using Hotspot JIT (headless)
+ Minimal Java runtime - needed for executing non GUI Java programs, using Hotspot JIT.
+
+Package: havis-jdk-8
+Architecture: any
+Multi-Arch: same
+Depends: ${misc:Depends},
+         ${shlibs:Depends}
+Pre-Depends: ${misc:Pre-Depends}
+Provides: havis-jre-8, openjdk-8-jre-headless (= 8u272-b10-0+deb9u1)
+Conflicts: havis-jre-8, openjdk-8-jre-headless
+Description: OpenJDK Java runtime, using Hotspot JIT (headless)
+ Minimal Java runtime - needed for executing non GUI Java programs, using Hotspot JIT.

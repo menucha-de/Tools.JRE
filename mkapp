@@ -1,0 +1,21 @@
+#!/bin/bash
+
+set -e
+set -x
+
+env
+
+. /usr/share/mkapp/functions
+
+set_env $ARCH
+
+dpkg --add-architecture armhf
+apt-get update
+apt-get install -y openjdk-8-jdk-headless:${ARCH}
+
+ant_build clean-all publish
+
+if [ "$PUBLISH" ]; then
+  publish_ivy ivy
+  publish_debs
+fi         

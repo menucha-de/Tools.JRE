@@ -1,0 +1,2 @@
+export LANG="C.UTF-8"
+ARGS="-Dhavis.net.server.http.port=80 -Djava.security.egd=file:/dev/./urandom --add-reads resteasy.jaxrs=org.slf4j --add-reads org.slf4j=org.slf4j.jul -cp /opt/havis-apps/bundle/*:/usr/share/java/*"

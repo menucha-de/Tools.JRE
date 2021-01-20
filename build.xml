@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<project name="havis-jre" default="publish" xmlns:ivy="antlib:org.apache.ivy.ant">
+
+	<property file="${basedir}/build.properties" />
+
+	<import>
+		<url url="${ivy.url}/ant/default.xml" />
+	</import>
+
+	<firstmatchmapper id="jarmapper">
+		<globmapper from="${build.dir}/*.jar" to="${dst.dir}/bundle/50_*.jar" />
+	</firstmatchmapper>
+
+	<target name="clean-cache">
+		<clean-cache />
+	</target>
+
+	<target name="clean-all">
+		<clean-all />
+	</target>
+
+	<target name="deb">
+		<check.build.properties />
+		<copy todir="${build.dir}/deb">
+			<fileset dir="${resources.dir}" />
+		</copy>
+		<chmod file="${build.dir}/deb/debian/rules" perm="755" />
+		<exec executable="fakeroot" dir="${build.dir}/deb" failonerror="true">
+			<env key="ARCH" value="${arch}" />
+			<arg value="debian/rules" />
+			<arg value="binary-all" />
+		</exec>
+		<exec executable="/bin/bash">
+			<env key="ARCH" value="${arch}" />
+			<env key="VERSION" value="${version}" />
+			<arg value="post.sh"/>
+		</exec>
+	</target>
+
+	<target name="publish" depends="deb" description="Publishes the JAR to the repository">
+		<move file="${build.dir}/${basename}-8_${version}-0_${arch}.deb" tofile="${build.dir}/${basename}-8.deb" />
+		<move file="${build.dir}/havis-jdk-8_${version}-0_${arch}.deb" tofile="${build.dir}/havis-jdk-8.deb" />
+		<publish version="${version}" jar="false" src="false" doc="false" app="false" />
+		<move file="${build.dir}/${basename}-8.deb" tofile="${build.dir}/${basename}-8_${version}-0_${arch}.deb" />
+		<move file="${build.dir}/havis-jdk-8.deb" tofile="${build.dir}/havis-jdk-8_${version}-0_${arch}.deb" />
+	</target>
+
+</project>

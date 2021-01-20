@@ -1,0 +1,37 @@
+#!/usr/bin/make -f
+ARCH ?= armhf
+MODULES=com.h2database.h2,havis.net.rest.shared,havis.net.rest.core,havis.net.server.http,havis.transport.common,havis.transform.common,havis.util.core.api,havis.util.core.common,java.rmi,jdk.scripting.nashorn
+OUTPUT=debian-tmp
+JAVA_HOME=/usr/lib/jvm/java-11-openjdk-$(ARCH)
+JAVA_8_HOME=/usr/lib/jvm/java-8-openjdk-$(ARCH)
+MODULE_PATH=$(JAVA_HOME)/jmods:lib
+%:
+	dh $@
+
+override_dh_auto_clean:
+	rm -rf ${OUTPUT}
+
+override_dh_auto_build:
+	ant -lib /usr/share/java -Dplatform=$(PLATFORM) -Divy.resolver=remote -Divy.url=$(IVY) -Divy.default.ivy.user.dir=/tmp -Divy.settings=ivysettings_remote.xml -Dapi.url=$(API) -Djavac.debug=$(DEBUG) retrieve
+	apt-get update
+	apt-get download openjdk-8-jre-headless:$(ARCH)
+	mkdir -p ${OUTPUT}/havis-jre-8
+	dpkg -X openjdk-8-jre-headless_*_$(ARCH).deb ${OUTPUT}/havis-jre-8
+	rm openjdk-8-jre-headless_*_$(ARCH).deb
+	zip -d ${OUTPUT}/havis-jre-8/usr/lib/jvm/java-8-openjdk-$(ARCH)/jre/lib/rt.jar /com/sun/corba* /com/sun/java/swing* /com/sun/media* /com/sun/swing* /javax/swing* /javax/print* /javax/sound* /javax/accessibility* /javax/tools* /javax/smartcardio* /org/omg*
+	jlink -G $(ARGS) --module-path $(MODULE_PATH) --compress=1 --output ${OUTPUT}/havis-jre/$(JAVA_HOME) --add-modules $(MODULES)
+	jlink $(ARGS) --module-path $(MODULE_PATH) --compress=1 --output ${OUTPUT}/havis-jdk/$(JAVA_HOME) --add-modules $(MODULES),jdk.jdeps,jdk.zipfs,jdk.jdwp.agent,jdk.jcmd
+
+override_dh_install:
+	dh_install -phavis-jre-8  --sourcedir ${OUTPUT}/havis-jre-8
+	dh_install -phavis-jdk-8  --sourcedir ${OUTPUT}/havis-jre-8
+	dh_install -phavis-jre  --sourcedir ${OUTPUT}/havis-jre
+	dh_install -phavis-jdk  --sourcedir ${OUTPUT}/havis-jdk
+
+override_dh_link:
+	dh_link -phavis-jre-8 $(JAVA_8_HOME)/bin/java usr/bin/java
+	dh_link -phavis-jdk-8 $(JAVA_8_HOME)/bin/java usr/bin/java
+	dh_link -phavis-jre $(JAVA_HOME)/bin/java usr/bin/java
+	dh_link -phavis-jdk $(JAVA_HOME)/bin/java usr/bin/java
+
+override_dh_strip_nondeterminism:
