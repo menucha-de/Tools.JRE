@@ -24,6 +24,9 @@
 		<copy todir="${build.dir}/deb">
 			<fileset dir="${resources.dir}" />
 		</copy>
+
+		<mkdir dir="${build.dir}/deb/usr/share/doc" />
+
 		<chmod file="${build.dir}/deb/debian/rules" perm="755" />
 		<exec executable="fakeroot" dir="${build.dir}/deb" failonerror="true">
 			<env key="ARCH" value="${arch}" />
