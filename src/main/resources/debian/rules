@@ -5,7 +5,8 @@ JAVA_8_HOME=/usr/lib/jvm/java-8-openjdk-$(ARCH)
 %:
 	dh_clean
 	rm -rf ${OUTPUT}
-	apt download openjdk-8-jre-headless:$(ARCH)
+	mkdir -p ${OUTPUT}/havis-jre-8/deb/usr/share/doc ${OUTPUT}/havis-jdk-8/deb/usr/share/doc 
+	apt-get download openjdk-8-jre-headless:$(ARCH)
 	mkdir -p ${OUTPUT}/havis-jre-8
 	dpkg -X openjdk-8-jre-headless_*_$(ARCH).deb ${OUTPUT}/havis-jre-8
 	rm openjdk-8-jre-headless_*_$(ARCH).deb
