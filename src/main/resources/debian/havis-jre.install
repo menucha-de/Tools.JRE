@@ -2,3 +2,4 @@
 /usr/lib/jvm/*/conf/*
 /usr/lib/jvm/*/lib/*
 /usr/lib/jvm/*/release
+/usr/share/doc/openjdk-8-*/copyright
