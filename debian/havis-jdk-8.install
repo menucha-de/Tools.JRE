@@ -21,3 +21,4 @@
 /usr/lib/jvm/java-8-openjdk-*/jre/lib/*/libmanagement.so
 /usr/lib/jvm/java-8-openjdk-*/jre/lib/*/libnpt.so
 /usr/lib/jvm/java-8-openjdk-*/jre/lib/*/libdt_socket.so
+/usr/share/doc/openjdk-8-*/copyright

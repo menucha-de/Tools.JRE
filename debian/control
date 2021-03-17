@@ -1,10 +1,10 @@
 Source: havis-jre
-Maintainer: HARTING IT_SD <opensource@HARTING.com>
+Maintainer: Menucha Team <info@menucha.de>
 Section: libs
 Priority: optional
 Build-Depends: openjdk-11-jdk-headless:amd64, openjdk-11-jdk-headless:armhf, zip
 Standards-Version: 4.0.0
-Homepage: https://peramic.github.io
+Homepage: https://menucha-de.github.io
 
 Package: havis-jre-8
 Architecture: any
