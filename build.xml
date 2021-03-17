@@ -34,11 +34,11 @@
 	</target>
 
 	<target name="publish" depends="deb" description="Publishes the JAR to the repository">
-		<move file="${build.dir}/${basename}-8_${version}-0_${arch}.deb" tofile="${build.dir}/${basename}-8.deb" />
-		<move file="${build.dir}/havis-jdk-8_${version}-0_${arch}.deb" tofile="${build.dir}/havis-jdk-8.deb" />
+		<move file="${build.dir}/${basename}-8_${version}-1_${arch}.deb" tofile="${build.dir}/${basename}-8.deb" />
+		<move file="${build.dir}/havis-jdk-8_${version}-1_${arch}.deb" tofile="${build.dir}/havis-jdk-8.deb" />
 		<publish version="${version}" jar="false" src="false" doc="false" app="false" />
-		<move file="${build.dir}/${basename}-8.deb" tofile="${build.dir}/${basename}-8_${version}-0_${arch}.deb" />
-		<move file="${build.dir}/havis-jdk-8.deb" tofile="${build.dir}/havis-jdk-8_${version}-0_${arch}.deb" />
+		<move file="${build.dir}/${basename}-8.deb" tofile="${build.dir}/${basename}-8_${version}-1_${arch}.deb" />
+		<move file="${build.dir}/havis-jdk-8.deb" tofile="${build.dir}/havis-jdk-8_${version}-1_${arch}.deb" />
 	</target>
 
 </project>
